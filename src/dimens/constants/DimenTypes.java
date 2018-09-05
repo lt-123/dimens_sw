@@ -4,6 +4,8 @@ package dimens.constants;
 public enum DimenTypes {
 
     //适配Android 3.2以上   大部分手机的sw值集中在  300-460之间
+    DP_sw__240(240),    // hdpi
+    DP_sw__260(260),    // 小辣椒
     DP_sw__320(320),    // xhdpi
     DP_sw__360(360),
     DP_sw__380(380),
