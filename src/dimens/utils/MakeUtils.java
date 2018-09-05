@@ -1,14 +1,13 @@
 package dimens.utils;
 
 
+import dimens.constants.DimenTypes;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
-
-import dimens.constants.DimenTypes;
-
 
 
 public class MakeUtils {
@@ -18,9 +17,9 @@ public class MakeUtils {
     private static final String XML_RESOURCE_END = "</resources>\r\n";
     private static final String XML_DIMEN_TEMPLETE = "<dimen name=\"qb_%1$spx_%2$d\">%3$.2fdp</dimen>\r\n";
 
-   
+
     private static final String XML_BASE_DPI = "<dimen name=\"base_dpi\">%ddp</dimen>\r\n";
-    private  static final int MAX_SIZE = 720;
+    private static final int MAX_SIZE = 720;
 
     /**
      * 生成的文件名
@@ -28,13 +27,13 @@ public class MakeUtils {
     private static final String XML_NAME = "dimens.xml";
 
 
-    public static float px2dip(float pxValue, int sw,int designWidth) {
-        float dpValue =   (pxValue/(float)designWidth) * sw;
+    public static float px2dip(float pxValue, int sw, int designWidth) {
+        float dpValue = (pxValue / (float) designWidth) * sw;
         BigDecimal bigDecimal = new BigDecimal(dpValue);
         float finDp = bigDecimal.setScale(2, BigDecimal.ROUND_HALF_UP).floatValue();
         return finDp;
     }
-    
+
 
     /**
      * 生成所有的尺寸数据
@@ -53,9 +52,9 @@ public class MakeUtils {
             temp = String.format(XML_BASE_DPI, type.getSwWidthDp());
             sb.append(temp);
             for (int i = 0; i <= MAX_SIZE; i++) {
-            	
-                dpValue = px2dip((float) i,type.getSwWidthDp(),designWidth);
-                temp = String.format(XML_DIMEN_TEMPLETE,"", i, dpValue);
+
+                dpValue = px2dip((float) i, type.getSwWidthDp(), designWidth);
+                temp = String.format(XML_DIMEN_TEMPLETE, "", i, dpValue);
                 sb.append(temp);
             }
 
@@ -68,12 +67,11 @@ public class MakeUtils {
     }
 
 
-
     /**
      * 生成的目标文件夹
      * 只需传宽进来就行
      *
-     * @param type 枚举类型
+     * @param type     枚举类型
      * @param buildDir 生成的目标文件夹
      */
     public static void makeAll(int designWidth, dimens.constants.DimenTypes type, String buildDir) {
@@ -83,10 +81,10 @@ public class MakeUtils {
             if (type.getSwWidthDp() > 0) {
                 //适配Android 3.2+
                 folderName = "values-sw" + type.getSwWidthDp() + "dp";
-            }else {
-            	return;
+            } else {
+                return;
             }
-            
+
             //生成目标目录
             File file = new File(buildDir + File.separator + folderName);
             if (!file.exists()) {
@@ -95,7 +93,7 @@ public class MakeUtils {
 
             //生成values文件
             FileOutputStream fos = new FileOutputStream(file.getAbsolutePath() + File.separator + XML_NAME);
-            fos.write(makeAllDimens(type,designWidth).getBytes());
+            fos.write(makeAllDimens(type, designWidth).getBytes());
             fos.flush();
             fos.close();
 
