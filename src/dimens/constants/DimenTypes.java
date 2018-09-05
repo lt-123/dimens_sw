@@ -4,10 +4,16 @@ package dimens.constants;
 public enum DimenTypes {
 
     //适配Android 3.2以上   大部分手机的sw值集中在  300-460之间
-    DP_sw__300(300),  // values-sw300
-    DP_sw__310(310),
-    DP_sw__320(320),
-    DP_sw__330(330);
+    DP_sw__320(320),    // xhdpi
+    DP_sw__360(360),
+    DP_sw__380(380),
+    DP_sw__400(400),
+    DP_sw__420(420),    // pixel 2 & 5x 1080  5'
+    DP_sw__460(460),
+    DP_sw__480(480),    // xxhdpi
+    DP_sw__560(560),    // pixel 2xl 1440 5.5'
+    DP_sw__640(640);    // xxxhdpi
+
     // 想生成多少自己以此类推
 
 
@@ -18,7 +24,6 @@ public enum DimenTypes {
 
 
     DimenTypes(int swWidthDp) {
-
         this.swWidthDp = swWidthDp;
     }
 
